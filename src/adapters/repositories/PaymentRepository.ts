@@ -10,7 +10,7 @@ import { type Payment } from '@/domain'
 export class PaymentRepository implements ILoadPaymentsRepository, IAddPaymentRepository, IUpdatePaymentRepository {
   async update (params: UpdatePaymentParamsRepository): Promise<void> {
     const { id, body } = params
-    await prismaClient.payment.update({ where: { id }, data: { ...body } })
+    await prismaClient.payment.update({ where: { orderId: id }, data: { ...body } })
   }
 
   async add (params: Payment): Promise<void> {

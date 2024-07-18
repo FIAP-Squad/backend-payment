@@ -13,6 +13,28 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model account {
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
+  email       String   @unique
+  name        String
+  cpf         String
+  password    String
+  accessToken String?
+  role        String?
+}
+
+model order {
+  id        String      @id @default(uuid())
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @default(now()) @updatedAt
+  number    Int?
+  customer  String
+  status    String
+  amount    Int
+}
+
 model payment {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
@@ -22,10 +44,24 @@ model payment {
   orderId   String @unique
 }
 
-model errors {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
-  data      String   @db.LongText
-  date      DateTime
+model product {
+  id          String      @id @default(uuid())
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @default(now()) @updatedAt
+  category    String
+  name        String
+  price       Int
+  description String
+  image       String
+}
+
+model orderItem {
+  id         String   @id @default(uuid())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now()) @updatedAt
+  totalItems Int
+  unitPrice  Int
+  amount     Int
+  orderId    String
+  productId  String
 }
