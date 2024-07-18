@@ -1,66 +1,60 @@
-import { LoadProducts } from '@/usecases'
-import { type ILoadProducts, type ILoadProductsRepository } from '@/core'
-import { type WithId, type Product } from '@/domain'
+import { LoadPayments } from '@/usecases'
+import { type ILoadPayments, type ILoadPaymentsRepository } from '@/core'
+import { type Payment } from '@/domain'
 
-const mockProducts = (): Array<WithId<Product>> => ([
+const mockPayments = (): Payment[] => ([
   {
-    id: 'any_id',
-    category: 'any_category',
-    name: 'any_name',
-    price: 1234,
-    description: 'any_description',
-    image: 'any_image'
+    amount: 1000,
+    status: 'any_status',
+    orderId: 'any_orderId'
   },
   {
-    id: 'other_id',
-    category: 'other_category',
-    name: 'other_name',
-    price: 1234,
-    description: 'other_description',
-    image: 'other_image'
+    amount: 2000,
+    status: 'other_status',
+    orderId: 'other_orderId'
   }
 ])
 
-const mockProductsRepository = (): ILoadProductsRepository => {
-  class LoadProductsRepositoryStub implements ILoadProductsRepository {
-    async loadAll (): Promise<Product[]> {
-      return await Promise.resolve(mockProducts())
+const mockPaymentRepository = (): ILoadPaymentsRepository => {
+  class LoadPaymentRepositoryStub implements ILoadPaymentsRepository {
+    async loadAll (): Promise<Payment[]> {
+      return await Promise.resolve(mockPayments())
     }
   }
-  return new LoadProductsRepositoryStub()
+  return new LoadPaymentRepositoryStub()
 }
 
 interface SutTypes {
-  sut: ILoadProducts
-  loadProductsRepositoryStub: ILoadProductsRepository
+  sut: ILoadPayments
+  loadPaymentsRepositoryStub: ILoadPaymentsRepository
 }
 
 const mockSut = (): SutTypes => {
-  const loadProductsRepositoryStub = mockProductsRepository()
-  const sut = new LoadProducts(loadProductsRepositoryStub)
+  const loadPaymentsRepositoryStub = mockPaymentRepository()
+  const sut = new LoadPayments(loadPaymentsRepositoryStub)
   return {
     sut,
-    loadProductsRepositoryStub
+    loadPaymentsRepositoryStub
   }
 }
 
-describe('LoadProducts', () => {
-  test('Should call ILoadProductsRepository', async () => {
-    const { sut, loadProductsRepositoryStub } = mockSut()
-    const loadAllSpy = jest.spyOn(loadProductsRepositoryStub, 'loadAll')
+describe('LoadPayments', () => {
+  test('Should call ILoadPaymentsRepository', async () => {
+    const { sut, loadPaymentsRepositoryStub } = mockSut()
+    const loadAllSpy = jest.spyOn(loadPaymentsRepositoryStub, 'loadAll')
     await sut.execute({})
     expect(loadAllSpy).toHaveBeenCalled()
   })
 
-  test('Should return a list of Products on success', async () => {
+  test('Should return a list of Payments on success', async () => {
     const { sut } = mockSut()
-    const products = await sut.execute({})
-    expect(products).toEqual(mockProducts())
+    const payments = await sut.execute({})
+    expect(payments).toEqual(mockPayments())
   })
 
-  test('Should throw if ILoadProductsRepository throws', async () => {
-    const { sut, loadProductsRepositoryStub } = mockSut()
-    jest.spyOn(loadProductsRepositoryStub, 'loadAll').mockReturnValueOnce(Promise.reject(new Error()))
+  test('Should throw if ILoadPaymentsRepository throws', async () => {
+    const { sut, loadPaymentsRepositoryStub } = mockSut()
+    jest.spyOn(loadPaymentsRepositoryStub, 'loadAll').mockReturnValueOnce(Promise.reject(new Error()))
     const promise = sut.execute({})
     await expect(promise).rejects.toThrow()
   })
