@@ -19,10 +19,10 @@
 # CMD ["node", "dist/main/server.js"]
 
 FROM node:18
-WORKDIR /usr/src/fiap-fase3-app
-COPY package*.json ./
+WORKDIR /usr/src/backend-payment
+COPY backend-payment/package*.json ./
 RUN npm i
-COPY . .
+COPY backend-payment/ .
 RUN npm run build
 RUN npx prisma generate
 ENV DATABASE_URL=mysql://root:root@payment_db:3306/payment_db
