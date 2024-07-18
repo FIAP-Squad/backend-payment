@@ -1,5 +1,5 @@
 {
-  "name": "fiap-fase4-payment-service",
+  "name": "fiap-fase4-backend-payment",
   "version": "2.17.6",
   "description": "NodeJs Rest API using TDD, Clean Architecture, Typescript and Design Patterns",
   "main": "dist/main/server.js",
