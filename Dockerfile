@@ -19,7 +19,7 @@
 # CMD ["node", "dist/main/server.js"]
 
 FROM node:18
-WORKDIR /usr/src/fiap-fase3-app
+WORKDIR /usr/src/backend-payment
 COPY package*.json ./
 RUN npm i
 COPY . .
