@@ -1,27 +1,55 @@
 version: '3.10'
 
 services:
-  app:
-    container_name: app
+  # orders_service:
+  #   container_name: orders
+  #   depends_on:
+  #     db:
+  #       condition: service_healthy
+  #   build:
+  #     context: .
+  #     dockerfile: backend-orders/Dockerfile
+  #   networks:
+  #     - fiap
+  #   ports:
+  #     - '81:5050'
+  #   environment:
+  #     DATABASE_URL: mysql://root:root@payment_db:3306/db
+  # products_service:
+  #   container_name: products
+  #   depends_on:
+  #     db:
+  #       condition: service_healthy
+  #   build:
+  #     context: .
+  #     dockerfile: backend-products/Dockerfile
+  #   networks:
+  #     - fiap
+  #   ports:
+  #     - '82:5050'
+  #   environment:
+  #     DATABASE_URL: mysql://root:root@payment_db:3306/db
+  payment_service:
+    container_name: payment
     depends_on:
-      payment_db:
+      db:
         condition: service_healthy
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: backend-payment/Dockerfile
     networks:
       - fiap
     ports:
-      - '80:5050'
+      - '83:5050'
     environment:
-      DATABASE_URL: mysql://root:root@payment_db:3306/payment_db
-  payment_db:
-    container_name: payment_db
+      DATABASE_URL: mysql://root:root@db:3306/db
+  db:
+    container_name: db
     image: mysql:latest
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: payment_db
+      MYSQL_DATABASE: db
     networks:
       - fiap
     ports:
