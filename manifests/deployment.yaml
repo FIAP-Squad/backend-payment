@@ -4,6 +4,7 @@ metadata:
   labels:
     app: backend-payment
   name: backend-payment
+  namespace: payment
 spec:
   replicas: 1
   selector:
@@ -17,5 +18,8 @@ spec:
       containers:
       - image: 43567/backend-payment:latest
         name: payment-container
+        envFrom:
+        - configMapRef:
+            name: payment-configmap
       imagePullSecrets:
         - name: backend-registry-secret

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: payment-configmap
+  namespace: payment
+data:
+  DATABASE_URL: "mysql://root:root@payment_db:3306/db" # CHANGE TO RDS ENDPOINT
