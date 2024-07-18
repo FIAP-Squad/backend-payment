@@ -1,0 +1,42 @@
+version: '3.10'
+
+services:
+  app:
+    container_name: app
+    depends_on:
+      payment_db:
+        condition: service_healthy
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - fiap
+    ports:
+      - '80:5050'
+    environment:
+      DATABASE_URL: mysql://root:root@payment_db:3306/payment_db
+  payment_db:
+    container_name: payment_db
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: payment_db
+    networks:
+      - fiap
+    ports:
+      - '3306:3306'
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: "/usr/bin/mysql --user=root --password=root --execute \"SHOW DATABASES;\""
+      interval: 2s
+      timeout: 20s
+      retries: 10
+
+networks:
+  fiap:
+
+volumes:
+  mysql-data:
+    driver: local
