@@ -4,7 +4,7 @@ services:
   app:
     container_name: app
     depends_on:
-      db:
+      payment_db:
         condition: service_healthy
     build:
       context: .
@@ -14,14 +14,14 @@ services:
     ports:
       - '80:5050'
     environment:
-      DATABASE_URL: mysql://root:root@db:3306/fiap_db
-  db:
-    container_name: db
+      DATABASE_URL: mysql://root:root@payment_db:3306/payment_db
+  payment_db:
+    container_name: payment_db
     image: mysql:latest
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: fiap_db
+      MYSQL_DATABASE: payment_db
     networks:
       - fiap
     ports:

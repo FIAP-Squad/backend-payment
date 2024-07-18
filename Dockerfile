@@ -15,7 +15,7 @@
 # WORKDIR /usr/src/fiap-fase3-app
 # COPY --from=build /usr/src/fiap-fase3-app/dist ./dist
 # COPY --from=build /usr/src/fiap-fase3-app/prisma ./prisma
-# ENV DATABASE_URL=mysql://root:root@db:3306/fiap_db
+# ENV DATABASE_URL=mysql://root:root@db:3307/payment_db
 # CMD ["node", "dist/main/server.js"]
 
 FROM node:18
@@ -25,7 +25,7 @@ RUN npm i
 COPY . .
 RUN npm run build
 RUN npx prisma generate
-ENV DATABASE_URL=mysql://root:root@db:3306/fiap_db
+ENV DATABASE_URL=mysql://root:root@payment_db:3306/payment_db
 RUN chmod +x ./start.sh
 # CMD ["node", "dist/main/server.js"]
 CMD ["./start.sh"]
