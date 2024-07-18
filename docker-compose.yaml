@@ -7,8 +7,8 @@ services:
   #     db:
   #       condition: service_healthy
   #   build:
-  #     context: backend-orders
-  #     dockerfile: backend-payment/Dockerfile
+  #     context: .
+  #     dockerfile: backend-orders/Dockerfile
   #   networks:
   #     - fiap
   #   ports:
@@ -20,6 +20,9 @@ services:
   #   depends_on:
   #     db:
   #       condition: service_healthy
+  #   build:
+  #     context: .
+  #     dockerfile: backend-products/Dockerfile
   #   networks:
   #     - fiap
   #   ports:
