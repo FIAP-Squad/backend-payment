@@ -1,13 +1,11 @@
 {
-  "name": "fiap-fase-4-payment-service",
+  "name": "fiap-fase4-payment-service",
   "version": "2.17.6",
   "description": "NodeJs Rest API using TDD, Clean Architecture, Typescript and Design Patterns",
   "main": "dist/main/server.js",
   "scripts": {
     "start": "npm run build && node dist/main/server.js",
     "build": "rimraf dist && tsc -p tsconfig-build.json",
-    "up": "npm run build && docker-compose up -d",
-    "down": "docker-compose down",
     "husky:prepare": "husky install",
     "lint:fix": "eslint 'src/**' --fix",
     "lint-staged:run": "npx lint-staged",
