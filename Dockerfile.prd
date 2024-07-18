@@ -10,7 +10,7 @@
 # COPY --from=base /usr/src/fiap-fase3-app/node_modules ./node_modules
 # COPY --from=base /usr/src/fiap-fase3-app/prisma ./prisma
 # RUN tsc
-
+#
 # FROM base as prod
 # WORKDIR /usr/src/fiap-fase3-app
 # COPY --from=build /usr/src/fiap-fase3-app/dist ./dist
