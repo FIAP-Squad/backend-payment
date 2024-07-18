@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: backend-payment
+  name: backend-payment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-payment
+  template:
+    metadata:
+      labels:
+        app: backend-payment
+    spec:
+      containers:
+      - image: 43567/backend-payment:latest
+        name: payment-container
+      imagePullSecrets:
+        - name: backend-registry-secret
