@@ -4,9 +4,9 @@ import {
   ValidationComposite
 } from '@/adapters/validation'
 
-export const makeUpdatePaymentValidation = (): IValidation => {
+export const makeAddPaymentValidation = (): IValidation => {
   const validations: IValidation[] = []
-  const fields = ['status']
+  const fields = ['status', 'amount', 'orderId']
   validations.push(new MandatoryFieldValidation(fields))
   return new ValidationComposite(validations)
 }

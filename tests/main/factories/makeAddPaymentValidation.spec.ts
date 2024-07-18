@@ -1,5 +1,5 @@
 import { type IValidation } from '@/core'
-import { makeUpdatePaymentValidation } from '@/main/factories/validations'
+import { makeAddPaymentValidation } from '@/main/factories/validations'
 import {
   MandatoryFieldValidation,
   ValidationComposite
@@ -7,11 +7,11 @@ import {
 
 jest.mock('@/adapters/validation/ValidationComposite')
 
-describe('Update Payment IValidation Factory', () => {
+describe('Add Payment IValidation Factory', () => {
   test('Should call validation with all validations ', () => {
-    makeUpdatePaymentValidation()
+    makeAddPaymentValidation()
     const validations: IValidation[] = []
-    const fields = ['status']
+    const fields = ['status', 'amount', 'orderId']
     validations.push(new MandatoryFieldValidation(fields))
     expect(ValidationComposite).toHaveBeenCalledWith(validations)
   })

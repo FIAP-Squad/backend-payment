@@ -13,6 +13,7 @@ export class PaymentRepository implements IAddPaymentRepository, IUpdatePaymentR
   }
 
   async add (params: Payment): Promise<void> {
+    console.log(params)
     await prismaClient.payment.create({ data: params })
   }
 }
