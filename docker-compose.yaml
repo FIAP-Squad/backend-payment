@@ -14,7 +14,7 @@ services:
     ports:
       - '80:5050'
     environment:
-      DATABASE_URL: mysql://root:root@payment_db:3306/payment_db
+      DATABASE_URL: mysql://admin:og2m3z7W,2Yz@fiap-rds-api-db.ccqmumqneyes.us-east-1.rds.amazonaws.com:3306/payment_db
   payment_db:
     container_name: payment_db
     image: mysql:latest
