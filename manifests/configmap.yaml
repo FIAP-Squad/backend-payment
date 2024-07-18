@@ -4,7 +4,7 @@ metadata:
   name: payment-configmap
   namespace: payment
 data:
-  DATABASE_URL: "mysql://root:root@payment_db:3306/db" # CHANGE TO RDS ENDPOINT
-  # USERS: ...
-  # PRODUCTS: ...
-  # ORDERS: ...
+  DATABASE_URL: "mysql://root:a95c530a7af5f492a74499e70578d150@fiap-rds-api-db.cfukas4y451o.us-east-1.rds.amazonaws.com:3306/db"
+  USERS: users-service.users.svc.cluster.local
+  PRODUCTS: products-service.products.svc.cluster.local
+  ORDERS: orders-service.orders.svc.cluster.local
