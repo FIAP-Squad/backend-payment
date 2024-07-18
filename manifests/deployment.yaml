@@ -2,22 +2,24 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: backend-payment
-  name: backend-payment
+    app: payment-microservice
+  name: payment-microservice
   namespace: payment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: backend-payment
+      app: payment-microservice
   template:
     metadata:
       labels:
-        app: backend-payment
+        app: payment-microservice
     spec:
       containers:
       - image: 43567/backend-payment:latest
         name: payment-container
+        ports:
+        - containerPort: 5050
         envFrom:
         - configMapRef:
             name: payment-configmap
