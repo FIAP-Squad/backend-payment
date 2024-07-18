@@ -1,10 +1,10 @@
 name: "Docker Build and Push"
 
 on:
-  push:
-    branches:
-      - main
-
+    workflow_run:
+        workflows: ["SonarCube and Test Analysis"]
+        types:
+            - completed
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
