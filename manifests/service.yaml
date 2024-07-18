@@ -7,6 +7,6 @@ spec:
   selector:
     app: payment-microservice
   ports:
-    - protocol: TCP
-      containerPort: 5050
+    - port: 80
+      targetPort: 5050
   type: LoadBalancer
